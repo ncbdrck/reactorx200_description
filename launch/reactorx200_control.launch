@@ -1,0 +1,13 @@
+<launch>
+
+    <!-- load the arm controller -->
+  <rosparam file="$(find reactorx200_description)/config/reactorx200_controller.yaml" command="load" />
+  <node
+          name="controller_spawner"
+          pkg="controller_manager"
+          type="controller_manager"
+          respawn="false"
+          output="screen"
+          args="spawn arm_controller gripper_controller joint_state_controller" />
+
+</launch>

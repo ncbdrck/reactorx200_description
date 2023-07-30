@@ -1,0 +1,56 @@
+<sdf version='1.7'>
+  <model name='block'>
+    <link name='block'>
+      <inertial>
+        <pose>0 0 0 0 -0 0</pose>
+        <mass>0.2496</mass>
+        <inertia>
+          <ixx>6.656e-05</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>6.656e-05</iyy>
+          <iyz>0</iyz>
+          <izz>6.656e-05</izz>
+        </inertia>
+      </inertial>
+      <collision name='block_collision'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.04 0.04 0.04</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <torsional>
+              <coefficient>0.456</coefficient>
+              <use_patch_radius>1</use_patch_radius>
+              <patch_radius>0.05</patch_radius>
+            </torsional>
+            <ode>
+              <mu>10000</mu>
+              <mu2>10000</mu2>
+            </ode>
+          </friction>
+          <contact>
+            <ode/>
+          </contact>
+        </surface>
+      </collision>
+      <visual name='block_visual'>
+        <pose>0 0 0 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.04 0.04 0.04</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <name>Gazebo/Red</name>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

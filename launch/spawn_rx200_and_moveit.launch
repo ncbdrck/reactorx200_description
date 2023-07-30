@@ -1,0 +1,72 @@
+<launch>
+    <arg name="paused" default="False"/>
+
+<!--    &lt;!&ndash; start simulated world &ndash;&gt;-->
+<!--    <include file="$(find gazebo_ros)/launch/empty_world.launch">-->
+<!--        <arg name="world_name" value="$(find interbotix_xsarm_gazebo)/worlds/xsarm_gazebo.world"/>-->
+<!--        <arg name="gui" value="true"/>-->
+<!--        <arg name="paused" value="$(arg paused)"/>-->
+<!--    </include>-->
+
+    <arg name="robot_model" default="rx200"/>
+    <arg name="robot_name" default="$(arg robot_model)"/>
+    <arg name="base_link_frame" default="base_link"/>
+    <arg name="show_ar_tag" default="false"/>
+    <arg name="external_srdf_loc" default=""/>
+    <arg name="use_moveit_rviz" default="true"/>
+    <arg name="rviz_frame" default="world"/>
+    <arg name="use_fake" default="false"/>
+    <arg name="dof" default="5"/>
+
+
+    <!-- load controllers -->
+    <rosparam
+            file="$(find interbotix_xsarm_gazebo)/config/trajectory_controllers/$(arg robot_model)_trajectory_controllers.yaml"
+            command="load" ns="$(arg robot_name)"/>
+
+    <node
+            name="controller_spawner"
+            pkg="controller_manager"
+            type="controller_manager"
+            respawn="false"
+            output="screen"
+            ns="$(arg robot_name)"
+            args="spawn arm_controller gripper_controller joint_state_controller"/>
+
+
+    <!-- Spawn robot -->
+    <arg name="model" default="$(find reactorx200_description)/urdf/rx200_kinect.urdf.xacro"/>
+
+    <param name="$(arg robot_name)/robot_description" command="xacro $(arg model)" />
+
+    <node
+    name="urdf_spawner"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    respawn="false"
+    output="screen"
+    ns="$(arg robot_name)"
+	  args="-urdf -model $(arg robot_model) -param robot_description -z 0.0"/>
+
+
+    <!-- Launch Moveit -->
+
+<!--    <include file="$(find interbotix_xsarm_moveit)/launch/move_group.launch" ns="$(arg robot_name)">-->
+<!--        <arg name="robot_model" value="$(arg robot_model)"/>-->
+<!--        <arg name="robot_name" value="$(arg robot_name)"/>-->
+<!--        <arg name="base_link_frame" value="$(arg base_link_frame)"/>-->
+<!--        <arg name="show_ar_tag" value="$(arg show_ar_tag)"/>-->
+<!--        <arg name="external_srdf_loc" value="$(arg external_srdf_loc)"/>-->
+<!--        <arg name="dof" value="$(arg dof)"/>-->
+<!--        <arg name="fake_execution" value="$(arg use_fake)"/>-->
+<!--        <arg name="publish_monitored_planning_scene" value="true"/>-->
+<!--        <arg name="allow_trajectory_execution" value="true"/>-->
+<!--    </include>-->
+
+<!--    <include if="$(arg use_moveit_rviz)" file="$(find interbotix_xsarm_moveit)/launch/moveit_rviz.launch"-->
+<!--             ns="$(arg robot_name)">-->
+<!--        <arg name="rviz_frame" value="$(arg rviz_frame)"/>-->
+<!--        <arg name="config" value="true"/>-->
+<!--    </include>-->
+
+</launch>

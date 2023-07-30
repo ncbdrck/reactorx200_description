@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="rx200">
+
+    <!-- rx200 -->
+    <xacro:include filename="$(find reactorx200_description)/urdf/rx200.urdf.xacro"/>
+
+
+    <!--Kinect-->
+    <!-- position of kinect has to be changed in common_sensors/urdf/sensors/kinect_properties.urdf.xacro -->
+    <xacro:include filename="$(find common_sensors)/urdf/sensors/kinect.urdf.xacro"/>
+    <xacro:sensor_kinect parent="world"/>
+
+    <!--
+    By Jay: to mount the camera in gazebo
+    https://abedgnu.github.io/Notes-ROS/chapters/ROS/10_robot_modeling/xarco.html
+    https://wiki.ros.org/xacro
+    -->
+    <!--Kinect v2-->
+<!--    <xacro:include filename="$(find common_sensors)/urdf/sensors/kinect2.urdf.xacro"/>-->
+<!--    <xacro:kinect2 name="kinect2" parent="world">-->
+<!--        <origin rpy="0 1.5 0" xyz="0 0.1 1"/>-->
+<!--    </xacro:kinect2>-->
+
+
+    <!--    <link name="world"/>-->
+    <!---->
+    <!--    <joint name="world_joint" type="fixed">-->
+    <!--        <parent link="world"/>-->
+    <!--        <child link="base_link"/>-->
+    <!--        <origin xyz="0.0 0.0 1.0" rpy="0.0 0.0 0.0"/>-->
+    <!--    </joint>-->
+
+</robot>

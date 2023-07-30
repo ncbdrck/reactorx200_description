@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>reactorx200_description</name>
+  <version>0.0.0</version>
+  <description>The reactorx200_description package</description>
+
+  <author email="j.kapukotuwa@research.ait.ie">Jayasekara Kapukotuwa</author>
+  <maintainer email="j.kapukotuwa@research.ait.ie">Jayasekara Kapukotuwa</maintainer>
+
+  <!--   <doc_depend>doxygen</doc_depend> -->
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_export_depend>roscpp</build_export_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>std_msgs</build_export_depend>
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+  <exec_depend>gazebo</exec_depend>
+  <exec_depend>gazebo_ros_pkgs</exec_depend>
+  <exec_depend>position_controllers</exec_depend>
+
+  <build_depend>joint_state_publisher</build_depend>
+  <build_depend>joint_state_publisher_gui</build_depend>
+  <build_depend>robot_state_publisher</build_depend>
+  <build_depend>roslaunch</build_depend>
+  <build_depend>rviz</build_depend>
+  <build_depend>xacro</build_depend>
+  <build_export_depend>joint_state_publisher</build_export_depend>
+  <build_export_depend>joint_state_publisher_gui</build_export_depend>
+  <build_export_depend>robot_state_publisher</build_export_depend>
+  <build_export_depend>roslaunch</build_export_depend>
+  <build_export_depend>rviz</build_export_depend>
+  <build_export_depend>xacro</build_export_depend>
+  <exec_depend>joint_state_publisher</exec_depend>
+  <exec_depend>joint_state_publisher_gui</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>roslaunch</exec_depend>
+  <exec_depend>rviz</exec_depend>
+  <exec_depend>xacro</exec_depend>
+
+  <build_depend>controller_manager</build_depend>
+  <build_depend>effort_controllers</build_depend>
+  <build_depend>gazebo_ros</build_depend>
+  <build_depend>gazebo_ros_control</build_depend>
+  <build_depend>interbotix_xsarm_descriptions</build_depend>
+  <build_depend>interbotix_xsarm_gazebo</build_depend>
+  <build_depend>joint_state_controller</build_depend>
+  <build_depend>joint_trajectory_controller</build_depend>
+  <build_export_depend>controller_manager</build_export_depend>
+  <build_export_depend>effort_controllers</build_export_depend>
+  <build_export_depend>gazebo_ros</build_export_depend>
+  <build_export_depend>gazebo_ros_control</build_export_depend>
+  <build_export_depend>interbotix_xsarm_descriptions</build_export_depend>
+  <build_export_depend>interbotix_xsarm_gazebo</build_export_depend>
+  <build_export_depend>joint_state_controller</build_export_depend>
+  <build_export_depend>joint_trajectory_controller</build_export_depend>
+  <exec_depend>controller_manager</exec_depend>
+  <exec_depend>effort_controllers</exec_depend>
+  <exec_depend>gazebo_ros</exec_depend>
+  <exec_depend>gazebo_ros_control</exec_depend>
+  <exec_depend>interbotix_xsarm_descriptions</exec_depend>
+  <exec_depend>interbotix_xsarm_gazebo</exec_depend>
+  <exec_depend>joint_state_controller</exec_depend>
+  <exec_depend>joint_trajectory_controller</exec_depend>
+
+
+   <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+    <gazebo_ros gazebo_model_path="${prefix}/.." />
+  </export>
+</package>
