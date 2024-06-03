@@ -16,7 +16,7 @@
     <joint name="zed2_mount_joint" type="fixed">
         <parent link="world"/> <!-- Change to the appropriate parent link in your robot -->
         <child link="zed2_camera_center"/>
-        <origin xyz="0.8 0 0.025" rpy="0 -0.2 ${pi}"/> <!-- Adjust the position and orientation as needed -->
+        <origin xyz="0.8 0 0.08" rpy="0 -0.2 ${pi}"/> <!-- Adjust the position and orientation as needed -->
     </joint>
 
 
