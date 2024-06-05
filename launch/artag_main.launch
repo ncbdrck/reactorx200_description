@@ -1,0 +1,57 @@
+<launch>
+    <arg name="paused" default="false"/>
+
+    <!-- start simulated world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="worlds/empty.world"/>
+        <arg name="gui" value="true"/>
+        <arg name="paused" value="$(arg paused)"/>
+    </include>
+
+  <arg name="namespace" default="rx200"/>
+
+    <group ns="$(arg namespace)">
+
+        <node name="spawn_table" pkg="gazebo_ros" type="spawn_model"
+              args="-file $(find reactorx200_description)/models/table/model.sdf -sdf -model table -x 0.2 -y 0 -z 0"/>
+
+        <!-- load urdf -->
+        <param name="robot_description"
+               command="$(find xacro)/xacro --inorder '$(find reactorx200_description)/urdf/rx200_kinect.urdf.xacro'"/>
+
+        <!-- spawn robot in gazebo -->
+        <node name="rx200_kinect_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+              args="-urdf -param robot_description -model rx200 -z 0.78"/>
+
+        <!-- publish joint states in TF -->
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen"/>
+
+        <!-- init and start Gazebo ros_control interface -->
+        <rosparam file="$(find reactorx200_description)/config/reactorx200_controller.yaml" command="load"/>
+        <node name="controller_spawner" pkg="controller_manager" type="spawner"
+              args="arm_controller gripper_controller joint_state_controller"/>
+
+<!--        <node name="spawn_cube" pkg="gazebo_ros" type="spawn_model" -->
+<!--              args="-file $(find reactorx200_description)/models/block/block_markers.urdf -urdf -x 0.10 -y 0.0 -z 0.78 -model block"/> -->
+
+        <!-- Spawn the block model -->
+        <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" output="screen"
+                args="-file $(find reactorx200_description)/models/block/block_markers.sdf -sdf -model block -x 0.10 -y 0.0 -z 0.78"/>
+    </group>
+
+    <!-- Start Moveit -->
+    <!--  <include file="$(find rx200_moveit_config)/launch/move_group.launch">-->
+    <!--    <arg name="publish_monitored_planning_scene" value="true" />-->
+    <!--    <arg name="fake_execution_type" value="false"/>-->
+    <!--    <arg name="moveit_controller_manager" value="simple" />-->
+    <!--  </include>-->
+    <!---->
+    <!-- Launch RViz -->
+    <!--  <node-->
+    <!--        pkg="rviz"-->
+    <!--        type="rviz"-->
+    <!--        name="rviz"-->
+    <!--        args="-d $(find reactorx200_description)/rviz/config.rviz"-->
+    <!--    />-->
+
+</launch>
