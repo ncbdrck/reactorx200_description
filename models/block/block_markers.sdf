@@ -1,6 +1,7 @@
-<sdf version='1.7'>
-  <model name='block'>
-    <link name='block'>
+<?xml version="1.0" ?>
+<sdf version="1.7">
+  <model name="block">
+    <link name="block">
       <inertial>
         <pose>0 0 0 0 0 0</pose>
         <mass>0.03</mass>
@@ -13,12 +14,12 @@
           <izz>8e-06</izz>
         </inertia>
       </inertial>
-      <collision name='block_collision'>
+      <collision name="block_collision">
         <pose>0 0 0 0 0 0</pose>
         <geometry>
-          <box>
-            <size>0.04 0.04 0.04</size>
-          </box>
+          <mesh>
+            <uri>model://reactorx200_description/models/block/meshes/block_markers.dae</uri>
+          </mesh>
         </geometry>
         <surface>
           <friction>
@@ -37,89 +38,13 @@
           </contact>
         </surface>
       </collision>
-      <visual name='visual_front'>
+      <visual name="block_visual">
         <pose>0 0 0 0 0 0</pose>
         <geometry>
-          <box>
-            <size>0.04 0.04 0.04</size>
-          </box>
+          <mesh>
+            <uri>model://reactorx200_description/models/block/meshes/block_markers.dae</uri>
+          </mesh>
         </geometry>
-        <material>
-          <script>
-            <uri>model://block/markers/marker_0.png</uri>
-            <name>marker_0</name>
-          </script>
-        </material>
-      </visual>
-      <visual name='visual_back'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>0.04 0.04 0.04</size>
-          </box>
-        </geometry>
-        <material>
-          <script>
-            <uri>model://block/markers/marker_1.png</uri>
-            <name>marker_1</name>
-          </script>
-        </material>
-      </visual>
-      <visual name='visual_left'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>0.04 0.04 0.04</size>
-          </box>
-        </geometry>
-        <material>
-          <script>
-            <uri>model://block/markers/marker_2.png</uri>
-            <name>marker_2</name>
-          </script>
-        </material>
-      </visual>
-      <visual name='visual_right'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>0.04 0.04 0.04</size>
-          </box>
-        </geometry>
-        <material>
-          <script>
-            <uri>model://block/markers/marker_3.png</uri>
-            <name>marker_3</name>
-          </script>
-        </material>
-      </visual>
-      <visual name='visual_top'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>0.04 0.04 0.04</size>
-          </box>
-        </geometry>
-        <material>
-          <script>
-            <uri>model://block/markers/marker_4.png</uri>
-            <name>marker_4</name>
-          </script>
-        </material>
-      </visual>
-      <visual name='visual_bottom'>
-        <pose>0 0 0 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>0.04 0.04 0.04</size>
-          </box>
-        </geometry>
-        <material>
-          <script>
-            <uri>model://block/markers/marker_5.png</uri>
-            <name>marker_5</name>
-          </script>
-        </material>
       </visual>
     </link>
   </model>

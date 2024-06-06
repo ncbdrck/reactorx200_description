@@ -31,12 +31,13 @@
         <node name="controller_spawner" pkg="controller_manager" type="spawner"
               args="arm_controller gripper_controller joint_state_controller"/>
 
-<!--        <node name="spawn_cube" pkg="gazebo_ros" type="spawn_model" -->
-<!--              args="-file $(find reactorx200_description)/models/block/block_markers.urdf -urdf -x 0.10 -y 0.0 -z 0.78 -model block"/> -->
-
-        <!-- Spawn the block model -->
-        <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" output="screen"
+        <!-- Spawn the Ar block model -->
+        <node name="spawn_ar_model" pkg="gazebo_ros" type="spawn_model" output="screen"
                 args="-file $(find reactorx200_description)/models/block/block_markers.sdf -sdf -model block -x 0.10 -y 0.0 -z 0.78"/>
+
+<!--         --><!-- Spawn the Red block model -->
+<!--         <node name="spawn_red_model" pkg="gazebo_ros" type="spawn_model" output="screen" -->
+<!--                 args="-file $(find reactorx200_description)/models/block/block.sdf -sdf -model red_block -x 0.10 -y 0.10 -z 0.78"/> -->
     </group>
 
     <!-- Start Moveit -->
