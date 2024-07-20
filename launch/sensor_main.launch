@@ -1,0 +1,80 @@
+<launch>
+    <arg name="paused" default="false"/>
+
+    <!-- start simulated world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="worlds/empty.world"/>
+        <arg name="gui" value="true"/>
+        <arg name="paused" value="$(arg paused)"/>
+    </include>
+
+  <arg name="namespace" default="rx200"/>
+
+    <group ns="$(arg namespace)">
+
+        <!-- spawn Table in gazebo -->
+        <node name="spawn_table" pkg="gazebo_ros" type="spawn_model"
+              args="-file $(find reactorx200_description)/models/table/model.sdf -sdf -model table -x 0.2 -y 0 -z 0"/>
+
+        <!-- load urdf -->
+        <param name="robot_description"
+               command="$(find xacro)/xacro --inorder '$(find reactorx200_description)/urdf/rx200_kinect.urdf.xacro'"/>
+
+        <!-- spawn robot in gazebo -->
+        <node name="rx200_kinect_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+              args="-urdf -param robot_description -model rx200 -z 0.78"/>
+
+        <!-- publish joint states in TF -->
+        <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" output="screen"/>
+
+        <!-- init and start Gazebo ros_control interface -->
+        <rosparam file="$(find reactorx200_description)/config/reactorx200_controller.yaml" command="load"/>
+        <node name="controller_spawner" pkg="controller_manager" type="spawner"
+              args="arm_controller gripper_controller joint_state_controller"/>
+
+       <!-- spawn cube in gazebo -->
+       <node name="spawn_cube" pkg="gazebo_ros" type="spawn_model"
+             args="-file $(find reactorx200_description)/models/block/block.urdf -urdf -x 0.10 -y 0.0 -z 0.78 -model red_cube"/>
+
+<!--         --><!-- spawn load cell sensor in gazebo -->
+<!--          <node name="spawn_load_cell" pkg="gazebo_ros" type="spawn_model" -->
+<!--                  args="-file $(find reactorx200_description)/models/load_cell_sensor/load_cell_sensor.sdf -sdf -x 0.25 -y 0.0 -z 0.78 -model load_cell"/> -->
+<!--          -->
+<!--         --><!-- spawn load cell sensor in gazebo -->
+<!--        <node name="spawn_load_cell" pkg="gazebo_ros" type="spawn_model" -->
+<!--              args="-file $(find reactorx200_description)/models/load_cell_sensor.urdf -urdf -model load_cell -x 0.25 -y 0.0 -z 0.78"/> -->
+
+
+        <!-- spawn pressure sensor in gazebo -->
+        <node name="spawn_pressure_sensor" pkg="gazebo_ros" type="spawn_model"
+              args="-file $(find reactorx200_description)/models/pressure_sensor.urdf -urdf -model pressure_sensor -x 0.25 -y 0.0 -z 0.78"/>
+
+
+
+    </group>
+
+<!--      --><!-- Launch moveit using -->
+<!--     <include file="$(find interbotix_xsarm_moveit_interface)/launch/xsarm_moveit_interface.launch"> -->
+<!--         <arg name="robot_model" value="rx200"/> -->
+<!--         <arg name="dof" value="5"/> -->
+<!--         <arg name="use_python_interface" value="true"/> -->
+<!--         <arg name="use_moveit_rviz" value="true"/> -->
+<!--     </include> -->
+
+
+    <!-- Start Moveit -->
+    <!--  <include file="$(find rx200_moveit_config)/launch/move_group.launch">-->
+    <!--    <arg name="publish_monitored_planning_scene" value="true" />-->
+    <!--    <arg name="fake_execution_type" value="false"/>-->
+    <!--    <arg name="moveit_controller_manager" value="simple" />-->
+    <!--  </include>-->
+    <!---->
+    <!-- Launch RViz -->
+    <!--  <node-->
+    <!--        pkg="rviz"-->
+    <!--        type="rviz"-->
+    <!--        name="rviz"-->
+    <!--        args="-d $(find reactorx200_description)/rviz/config.rviz"-->
+    <!--    />-->
+
+</launch>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot name="pressure_sensor_robot">
+  <!-- Base Link -->
+  <link name="sensor_base_link">
+    <visual>
+      <geometry>
+        <cylinder length="0.001" radius="0.03"/> <!-- Base link with reduced height to 1mm -->
+      </geometry>
+      <material name="gray"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.001" radius="0.03"/> <!-- Base link with reduced height to 1mm -->
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Pressure Sensor Link -->
+  <link name="pressure_sensor">
+    <visual>
+      <geometry>
+        <cylinder length="0.005" radius="0.025"/> <!-- Small cylinder for pressure sensor -->
+      </geometry>
+      <material name="green"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="0.005" radius="0.025"/> <!-- Small cylinder for pressure sensor -->
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="pressure_sensor_joint" type="fixed">
+    <parent link="sensor_base_link"/>
+    <child link="pressure_sensor"/>
+    <origin xyz="0 0 0.003" rpy="0 0 0"/> <!-- Slight offset to avoid collision overlap -->
+  </joint>
+
+  <!-- Gazebo Plugins -->
+  <gazebo>
+    <sensor type="contact" name="pressure_sensor_contact">
+      <always_on>true</always_on>
+      <update_rate>50.0</update_rate>
+      <contact>
+        <collision>pressure_sensor::pressure_sensor_collision</collision>
+      </contact>
+      <plugin name="gazebo_ros_bumper" filename="libgazebo_ros_bumper.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>50.0</updateRate>
+        <bumperTopicName>pressure_sensor</bumperTopicName>
+      </plugin>
+    </sensor>
+  </gazebo>
+</robot>

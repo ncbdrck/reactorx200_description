@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<robot name="load_cell_robot">
+  <!-- Base Link -->
+  <link name="sensor_base_link">
+    <visual>
+      <geometry>
+        <box size="0.06 0.06 0.001"/> <!-- Reduced height to 1mm -->
+      </geometry>
+      <material name="gray"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.06 0.06 0.001"/> <!-- Reduced height to 1mm -->
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Load Cell Link -->
+  <link name="load_cell">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.005"/> <!-- Small box for load cell -->
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.05 0.05 0.005"/> <!-- Small box for load cell -->
+      </geometry>
+    </collision>
+  </link>
+
+  <!-- Joint Definition -->
+  <joint name="load_cell_joint" type="fixed">
+    <parent link="sensor_base_link"/>
+    <child link="load_cell"/>
+    <origin xyz="0 0 0.003" rpy="0 0 0"/> <!-- Slight offset to avoid collision overlap -->
+  </joint>
+
+  <gazebo reference="load_cell_joint">
+    <provideFeedback>true</provideFeedback>
+  </gazebo>
+
+  <!-- Gazebo Plugins -->
+  <gazebo>
+    <plugin name="ft_sensor" filename="libgazebo_ros_ft_sensor.so">
+      <updateRate>50.0</updateRate>
+      <topicName>load_cell_sensor</topicName>
+      <jointName>load_cell_joint</jointName> <!-- Correct joint name -->
+    </plugin>
+  </gazebo>
+</robot>
