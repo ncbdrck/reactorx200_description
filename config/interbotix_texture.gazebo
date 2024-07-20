@@ -5,6 +5,7 @@
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
       <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
       <legacyModeNS>true</legacyModeNS>
+      <controlPeriod>0.100</controlPeriod>  <!-- 10 Hz for actuator commands -->
     </plugin>
   </gazebo>
 
