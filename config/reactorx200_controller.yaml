@@ -2,7 +2,7 @@
 # Creates the /joint_states topic necessary in ROS
 joint_state_controller:
   type: joint_state_controller/JointStateController
-  publish_rate: 100
+  publish_rate: 10
 
 arm_controller:
   type: effort_controllers/JointTrajectoryController
